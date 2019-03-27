@@ -1,0 +1,19 @@
+<h1>Kegs</h1>
+<div class="kegs">
+  <h3></h3>
+  <ul>
+    <li [class]=levelColor(currentKeg) *ngFor="let currentKeg of kegs">{{currentKeg.name}}<br>{{currentKeg.abv}}<br>{{currentKeg.level}} <button (click)="editKegs(currentKeg)">EDIT</button></li>
+  </ul>
+</div>
+<div *ngIf="selectedKeg">
+  <h3>{{selectedKeg.name}}</h3>
+  <p>{{selectedKeg.done}}</p>
+  <h3>Edit Keg</h3>
+  <label>Enter Keg Name:</label>
+  <input [(ngModel)]="selectedKeg.name">
+  <label>Enter Keg ABV:</label>
+  <input [(ngModel)]="selectedKeg.abv">
+  <label>Enter Keg Level:</label>
+  <input [(ngModel)]="selectedKeg.level">
+  <button (click)="finishedEditing()">Done</button>
+</div>
