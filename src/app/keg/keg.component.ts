@@ -79,6 +79,7 @@ export class KegComponent implements OnInit {
     this.orderbtn = false;
     this.logoutbtn = false;
     this.removeDiscount = null;
+    this.discountButton = null;
   }
   levelColor(currentKeg){
     if(currentKeg.level >= 80){
