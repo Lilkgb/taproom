@@ -5,9 +5,41 @@
   background-color: yellow;
 }
 .red {
-  background-color: red;
+  background-color: darkred;
+}
+h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+button{
+  height: 20px;
+  margin-left: 10px;
 }
 
-ul{
-  width: 300px;
+#orderForm{
+  width: 500px;
+  border: solid black 1px;
+}
+.active{
+  border: 2px solid black;
+  margin-left: 10px;
+}
+div{
+  border-radius: 15px;
+}
+.stuff {
+  padding: 10px;
+}
+.sales {
+  margin-left: 10px;
+  margin-bottom: 3px;
+  margin-top: 5px;
+}
+.editNfill {
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.pink {
+  background-color: hotpink;
 }

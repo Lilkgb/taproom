@@ -1,9 +1,59 @@
 <h1>Kegs</h1>
+<div class="header">
+  <button *ngIf="loginbtn" (click)="loginButton()">Login</button>
+  <button *ngIf='registerbtn' (click)="register()">Register</button>
+  <button *ngIf='logoutbtn' (click)='logout()'>Logout</button>
+  <div class="login" *ngIf="showLogin">
+    <form>
+      <h1>Login</h1>
+      <input id="username" placeholder="Username" value="username">
+      <input id="password" placeholder="Password" type="password" value="password">
+      <button (click)="login()">Enter</button>
+    </form>
+  </div>
+  <div class="register" *ngIf='newRegister'>
+    <form>
+      <h1>Create A New Account</h1>
+      <input id='newuser' placeholder="Username" >
+      <input type="password" id='newpass' placeholder="Password" >
+      <button (click)='makeNewAccount()'>Register</button>
+    </form>
+  </div>
+</div>
+<div class="orderButton">
+    <button *ngIf='orderbtn' (click)="orderKeg()">Order a new Keg</button>
+</div>
 <div class="kegs">
   <h3></h3>
-  <ul>
-    <li [class]=levelColor(currentKeg) *ngFor="let currentKeg of kegs">{{currentKeg.name}}<br>{{currentKeg.abv}}<br>{{currentKeg.level}} <button (click)="editKegs(currentKeg)">EDIT</button></li>
-  </ul>
+  <div [class]=levelColor(currentKeg) *ngFor="let currentKeg of kegs"  [class.active]="currentKeg === selectedKeg">
+    <div class="editNfill">
+      <button *ngIf="button" (click)="editKegs(currentKeg)">EDIT</button>
+      <button *ngIf="button" (click)="refill(currentKeg)">Refill</button>
+      <button *ngIf="discountButton" (click)="discount(currentKeg)">Discount</button>
+      <button *ngIf="removeDiscount" (click)="removeDis(currentKeg)">Remove Discount</button>
+    </div>
+    <h4 class="stuff">{{currentKeg.name}}<br>ABV: {{currentKeg.abv}}<br>Level: {{currentKeg.level}}<br><span *ngIf="regularPricing">Price: ${{currentKeg.price}}</span><span [class]="discountColor(currentKeg)" *ngIf="discountPricing">Discount Price: {{currentKeg.discount}} </span></h4>
+    <h3 class="sales">Sales:</h3>
+    <button *ngIf="button" (click)="sellGlass(currentKeg)">Glass</button>
+    <button *ngIf="button" (click)="sellGrowler(currentKeg)">Growler</button>
+    <button *ngIf="button" (click)="sellLargeGrowler(currentKeg)">Large Growler</button>
+  </div>
+</div>
+<form *ngIf="discounts">
+  <h3>Discount input</h3>
+  <input type="number" id="discountInput">
+  <button (click)="sumbitDiscount(selectedKeg)">Submit discount</button>
+</form>
+<div class="orderForm">
+  <div *ngIf="orderSelected">
+    <form id="orderForm">
+      <label>Beer Type</label>
+      <input type="text" id="name" required>
+      <label>ABV</label>
+      <input type="text" id="abv" required>
+      <button type="submit" (click)="orderNewKeg()">Place order</button>
+    </form>
+  </div>
 </div>
 <div *ngIf="selectedKeg">
   <h3>{{selectedKeg.name}}</h3>
@@ -15,5 +65,7 @@
   <input [(ngModel)]="selectedKeg.abv">
   <label>Enter Keg Level:</label>
   <input [(ngModel)]="selectedKeg.level">
+  <label>Enter Price:</label>
+  <input [(ngModel)]='selectedKeg.price'>
   <button (click)="finishedEditing()">Done</button>
 </div>
